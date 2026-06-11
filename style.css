@@ -1,0 +1,587 @@
+/* =========================
+   GOOGLE WEDDING INVITATION
+   SOEHENDRA & RICA RISMAWATI
+========================= */
+
+:root {
+    --gold: #c8a96a;
+    --gold-dark: #aa8a4b;
+    --black: #1f1f1f;
+    --white: #ffffff;
+    --bg: #faf7f2;
+    --text: #555555;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+    --radius: 20px;
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.8;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* =========================
+   BASE LAYOUT
+========================= */
+
+.container {
+    width: min(1100px, 92%);
+    margin: auto;
+}
+
+.section {
+    padding: 90px 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+.section-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 3rem;
+    color: var(--black);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    width: 90px;
+    height: 3px;
+    background: var(--gold);
+    display: block;
+    margin: 12px auto 0;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(0, 0, 0, .45), rgba(0, 0, 0, .45)),
+        url("assets/cover.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(2px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: min(700px, 90%);
+}
+
+.hero-subtitle {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.hero h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 5rem;
+    line-height: 1.1;
+    margin: 20px 0;
+    text-shadow: 0 5px 20px rgba(0,0,0,.3);
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+#guestName {
+    margin-top: 15px;
+    font-weight: 400;
+}
+
+.primary-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 50px;
+    background: var(--gold);
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .3s;
+    font-size: .95rem;
+}
+
+.primary-btn:hover {
+    background: var(--gold-dark);
+    transform: translateY(-3px);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+#content {
+    display: none;
+}
+
+/* =========================
+   COUPLE
+========================= */
+
+.couple-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.couple-card {
+    background: white;
+    padding: 35px;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.couple-card img {
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: auto;
+    border: 5px solid var(--gold);
+}
+
+.couple-card h3 {
+    margin-top: 20px;
+    color: var(--black);
+    font-size: 1.8rem;
+    font-family: "Cormorant Garamond", serif;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+.countdown-box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.time-card {
+    background: white;
+    padding: 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(200,169,106,.2);
+}
+
+.time-card span {
+    display: block;
+    font-size: 2.7rem;
+    font-weight: 700;
+    color: var(--gold-dark);
+}
+
+/* =========================
+   LOVE STORY
+========================= */
+
+.timeline {
+    max-width: 800px;
+    margin: auto;
+}
+
+.timeline-item {
+    background: white;
+    padding: 25px;
+    border-left: 5px solid var(--gold);
+    margin-bottom: 20px;
+    border-radius: 0 15px 15px 0;
+    box-shadow: var(--shadow);
+}
+
+.timeline-item h3 {
+    color: var(--gold-dark);
+    margin-bottom: 5px;
+}
+
+/* =========================
+   EVENT GRID (AKAD & RESEPSI SIDE BY SIDE)
+========================= */
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.event-card {
+    background: white;
+    padding: 40px;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.event-card h2 {
+    color: var(--black);
+    margin-bottom: 10px;
+}
+
+.event-card hr {
+    margin: 25px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   QR MAP
+========================= */
+
+.qr-box {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.qr-box img {
+    width: 280px;
+    margin: auto;
+}
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid img {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: .4s;
+    height: 320px;
+    object-fit: cover;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.03);
+}
+
+/* =========================
+   AMPLop DIGITAL (FIX STYLE)
+========================= */
+
+.rekening-slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.rekening-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 5px;
+    width: 100%;
+}
+
+.rekening-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.rekening {
+    background: white;
+    padding: 25px;
+    min-width: 320px;
+    text-align: center;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(200,169,106,.15);
+    transition: .3s;
+}
+
+.rekening:hover {
+    transform: translateY(-3px);
+}
+
+.rekening h3 {
+    color: var(--gold-dark);
+    margin-bottom: 10px;
+}
+
+.rekening button {
+    margin-top: 15px;
+    background: var(--gold);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.rekening button:hover {
+    background: var(--gold-dark);
+}
+
+/* tombol slide */
+.slide-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: var(--gold);
+    color: white;
+    font-size: 22px;
+    box-shadow: var(--shadow);
+    transition: .3s;
+    flex-shrink: 0;
+}
+
+.slide-btn:hover {
+    background: var(--gold-dark);
+}
+
+/* =========================
+   RSVP
+========================= */
+
+.rsvp-form {
+    max-width: 650px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+    width: 100%;
+    padding: 16px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    background: white;
+    font-family: inherit;
+    font-size: .95rem;
+    outline: none;
+    transition: .3s;
+}
+
+.rsvp-form input:focus,
+.rsvp-form select:focus,
+.rsvp-form textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(200,169,106,.15);
+}
+
+.rsvp-form textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.rsvp-form button {
+    background: var(--gold);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: .3s;
+    font-size: 1rem;
+}
+
+.rsvp-form button:hover {
+    background: var(--gold-dark);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    padding: 80px 20px;
+    background: white;
+    margin-top: 50px;
+    border-top: 1px solid #eee;
+}
+
+footer h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.2rem;
+    color: var(--black);
+    margin-bottom: 10px;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* =========================
+   FLOATING BUTTONS
+========================= */
+
+.floating-wa {
+    position: fixed;
+    right: 20px;
+    bottom: 25px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 10px 25px rgba(0,0,0,.2);
+    z-index: 999;
+}
+
+.floating-music {
+    position: fixed;
+    left: 20px;
+    bottom: 25px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: var(--gold);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,.2);
+    z-index: 999;
+}
+
+#backToTop {
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--black);
+    color: white;
+    cursor: pointer;
+    display: none;
+    z-index: 999;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 4rem;
+    }
+
+    .countdown-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 70px 15px;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .section-title {
+        font-size: 2.3rem;
+    }
+
+    .couple-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .couple-card img {
+        width: 220px;
+        height: 220px;
+    }
+
+    .countdown-box {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .time-card span {
+        font-size: 2rem;
+    }
+
+    .gallery-grid img {
+        height: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .countdown-box {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .event-card,
+    .rekening {
+        padding: 25px;
+    }
+}
