@@ -1,257 +1,46 @@
 /* =====================================================
-   SOEHENDRA & RICA RISMAWATI - WEDDING INVITATION
+   SOEHENDRA & RICA RISMAWATI
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+
     initGuestName();
     initCountdown();
     initRSVP();
-    initMusicButton();
+    initMusic();
+    initGallery();
     initBackToTop();
+    initScrollProgress();
+    initNavbar();
     initAOS();
+
 });
 
 /* =====================================================
    OPEN INVITATION
 ===================================================== */
-function openInvitation() {
-    document.querySelector(".hero").style.display = "none";
-    document.getElementById("content").style.display = "block";
-}
 
-/* =====================================================
-   CONFETTI
-===================================================== */
-function launchConfetti() {
-    if (typeof confetti === "undefined") return;
+function openInvitation(){
 
-    confetti({
-        particleCount: 150,
-        spread: 90,
-        origin: { y: 0.6 }
-    });
+    const hero=document.querySelector(".hero");
 
-    setTimeout(() => {
-        confetti({
-            particleCount: 100,
-            spread: 120,
-            origin: { y: 0.5 }
-        });
-    }, 300);
-}
+    const content=document.getElementById("content");
 
-/* =====================================================
-   GUEST NAME (?to=Nama)
-===================================================== */
-function initGuestName() {
-    const guestElement = document.getElementById("guestName");
-    if (!guestElement) return;
+    if(hero) hero.style.display="none";
 
-    const params = new URLSearchParams(window.location.search);
-    const guest = params.get("to");
+    if(content){
 
-    if (guest) {
-        guestElement.innerHTML =
-            `Kepada Yth.<br>${decodeURIComponent(guest)}`;
-    }
-}
+        content.style.display="block";
 
-/* =====================================================
-   COUNTDOWN
-===================================================== */
-function initCountdown() {
-    const weddingDate = new Date("2027-07-07T09:00:00").getTime();
+        content.style.animation="fadeIn .8s";
 
-    function updateCountdown() {
-        const now = Date.now();
-        const diff = weddingDate - now;
-
-        if (diff <= 0) {
-            setCountdownValue("days", 0);
-            setCountdownValue("hours", 0);
-            setCountdownValue("minutes", 0);
-            setCountdownValue("seconds", 0);
-            return;
-        }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        setCountdownValue("days", days);
-        setCountdownValue("hours", hours);
-        setCountdownValue("minutes", minutes);
-        setCountdownValue("seconds", seconds);
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
-
-function setCountdownValue(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
-}
-
-/* =========================
-   COPY REKENING (FIX + NOTIF)
-========================= */
-
-function copyRekening(number) {
-    navigator.clipboard.writeText(number).then(() => {
-
-        // notifikasi kecil (lebih bagus dari alert)
-        const toast = document.createElement("div");
-        toast.textContent = "Nomor berhasil disalin";
-        toast.style.position = "fixed";
-        toast.style.bottom = "30px";
-        toast.style.left = "50%";
-        toast.style.transform = "translateX(-50%)";
-        toast.style.background = "#1f1f1f";
-        toast.style.color = "white";
-        toast.style.padding = "12px 20px";
-        toast.style.borderRadius = "50px";
-        toast.style.boxShadow = "0 10px 25px rgba(0,0,0,.2)";
-        toast.style.zIndex = "9999";
-
-        document.body.appendChild(toast);
-
-        setTimeout(() => {
-            toast.remove();
-        }, 2000);
-
-    });
-}
-
-/* =========================
-   REKENING SLIDER FIX
-========================= */
-
-function scrollRekening(direction) {
-    const slider = document.getElementById("rekeningSlider");
-    if (!slider) return;
-
-    const amount = 340;
-
-    slider.scrollBy({
-        left: direction * amount,
-        behavior: "smooth"
-    });
 }
 
 /* =====================================================
-   RSVP WHATSAPP
-===================================================== */
-
-function initRSVP() {
-
-    const form = document.getElementById("rsvpForm");
-
-    if (!form) return;
-
-    form.addEventListener("submit", function (e) {
-
-        e.preventDefault();
-
-        const nama =
-            document.getElementById("nama").value.trim();
-
-        const status =
-            document.getElementById("status").value;
-
-        const jumlahTamu =
-            document.getElementById("jumlahTamu").value || 1;
-
-        const ucapan =
-            document.getElementById("ucapan").value.trim();
-
-        const nomorWA = "6285810273385";
-
-        const pesan =
-`Assalamu'alaikum Wr. Wb.
-
-Konfirmasi Kehadiran Pernikahan
-
-Nama : ${nama}
-Kehadiran : ${status}
-Jumlah Tamu : ${jumlahTamu}
-
-Ucapan & Doa :
-${ucapan}
-
-Terima kasih.`;
-
-        const waUrl =
-            `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
-
-        window.open(waUrl, "_blank");
-
-        form.reset();
-
-    });
-
-}
-
-/* =====================================================
-   MUSIC BUTTON
-===================================================== */
-function initMusicButton() {
-    const musicButton = document.getElementById("musicToggle");
-    const music = document.getElementById("music");
-
-    if (!musicButton || !music) return;
-
-    let isPlaying = false;
-
-    musicButton.addEventListener("click", () => {
-        if (isPlaying) {
-            music.pause();
-            musicButton.innerHTML = "♫";
-            isPlaying = false;
-        } else {
-            music.play();
-            musicButton.innerHTML = "❚❚";
-            isPlaying = true;
-        }
-    });
-}
-
-/* =====================================================
-   BACK TO TOP
-===================================================== */
-function initBackToTop() {
-    const button = document.getElementById("backToTop");
-    if (!button) return;
-
-    window.addEventListener("scroll", () => {
-        button.style.display = window.scrollY > 400 ? "block" : "none";
-    });
-}
-
-function scrollTopPage() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-/* =====================================================
-   AOS ANIMATION
-===================================================== */
-function initAOS() {
-    if (typeof AOS === "undefined") return;
-
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 80
-    });
-}
-
-/* ==========================================================
    GUEST NAME
-========================================================== */
+===================================================== */
 
 function initGuestName(){
 
@@ -265,17 +54,15 @@ function initGuestName(){
 
     if(name){
 
-        guest.innerHTML=
-
-        `Kepada Yth.<br><strong>${decodeURIComponent(name)}</strong>`;
+        guest.innerHTML=`Kepada Yth.<br><strong>${decodeURIComponent(name)}</strong>`;
 
     }
 
 }
 
-/* ==========================================================
+/* =====================================================
    COUNTDOWN
-========================================================== */
+===================================================== */
 
 function initCountdown(){
 
@@ -293,79 +80,49 @@ function initCountdown(){
 
         if(distance<=0){
 
-            setValue("days",0);
-
-            setValue("hours",0);
-
-            setValue("minutes",0);
-
-            setValue("seconds",0);
+            setNumber("days",0);
+            setNumber("hours",0);
+            setNumber("minutes",0);
+            setNumber("seconds",0);
 
             return;
 
         }
 
-        const days=Math.floor(distance/86400000);
-
-        const hours=Math.floor((distance%86400000)/3600000);
-
-        const minutes=Math.floor((distance%3600000)/60000);
-
-        const seconds=Math.floor((distance%60000)/1000);
-
-        animateNumber("days",days);
-
-        animateNumber("hours",hours);
-
-        animateNumber("minutes",minutes);
-
-        animateNumber("seconds",seconds);
+        setNumber("days",Math.floor(distance/86400000));
+        setNumber("hours",Math.floor(distance%86400000/3600000));
+        setNumber("minutes",Math.floor(distance%3600000/60000));
+        setNumber("seconds",Math.floor(distance%60000/1000));
 
     }
 
 }
 
-function setValue(id,val){
-
-    const el=document.getElementById(id);
-
-    if(el){
-
-        el.textContent=val;
-
-    }
-
-}
-
-function animateNumber(id,newValue){
+function setNumber(id,value){
 
     const el=document.getElementById(id);
 
     if(!el) return;
 
-    if(el.dataset.value==newValue) return;
+    if(el.dataset.value==value) return;
 
-    el.dataset.value=newValue;
+    el.dataset.value=value;
 
     el.style.transform="scale(1.15)";
 
-    el.style.opacity=".6";
-
     setTimeout(()=>{
 
-        el.textContent=newValue;
+        el.textContent=value;
 
         el.style.transform="scale(1)";
-
-        el.style.opacity="1";
 
     },120);
 
 }
 
-/* ==========================================================
+/* =====================================================
    COPY REKENING
-========================================================== */
+===================================================== */
 
 function copyRekening(number){
 
@@ -385,15 +142,23 @@ function copyRekening(number){
 
 }
 
-/* ==========================================================
+/* =====================================================
    TOAST
-========================================================== */
+===================================================== */
 
 function showToast(message){
 
-    const toast=document.getElementById("toast");
+    let toast=document.getElementById("toast");
 
-    if(!toast) return;
+    if(!toast){
+
+        toast=document.createElement("div");
+
+        toast.id="toast";
+
+        document.body.appendChild(toast);
+
+    }
 
     toast.textContent=message;
 
@@ -409,9 +174,9 @@ function showToast(message){
 
 }
 
-/* ==========================================================
+/* =====================================================
    SLIDER REKENING
-========================================================== */
+===================================================== */
 
 function scrollRekening(direction){
 
@@ -436,7 +201,6 @@ function scrollRekening(direction){
 function initRSVP(){
 
     const form=document.getElementById("rsvpForm");
-
     const wishList=document.getElementById("wishList");
 
     if(!form||!wishList) return;
@@ -447,23 +211,15 @@ function initRSVP(){
 
         e.preventDefault();
 
-        const nama=document.getElementById("nama").value.trim();
-
-        const status=document.getElementById("status").value;
-
-        const jumlah=document.getElementById("jumlahTamu").value||1;
-
-        const ucapan=document.getElementById("ucapan").value.trim();
-
         const data={
 
-            nama,
+            nama:document.getElementById("nama").value.trim(),
 
-            status,
+            status:document.getElementById("status").value,
 
-            jumlah,
+            jumlah:document.getElementById("jumlahTamu").value||1,
 
-            ucapan,
+            ucapan:document.getElementById("ucapan").value.trim(),
 
             waktu:new Date().toLocaleString("id-ID")
 
@@ -491,11 +247,7 @@ function initRSVP(){
 
 function getWishData(){
 
-    return JSON.parse(
-
-        localStorage.getItem("weddingWish")||"[]"
-
-    );
+    return JSON.parse(localStorage.getItem("weddingWish")||"[]");
 
 }
 
@@ -505,13 +257,7 @@ function saveWish(data){
 
     list.unshift(data);
 
-    localStorage.setItem(
-
-        "weddingWish",
-
-        JSON.stringify(list)
-
-    );
+    localStorage.setItem("weddingWish",JSON.stringify(list));
 
 }
 
@@ -541,13 +287,7 @@ function renderWish(item){
 
         <strong>${item.nama}</strong>
 
-        <small>
-
-        ${item.status}
-        •
-        ${item.jumlah} Orang
-
-        </small>
+        <small>${item.status} • ${item.jumlah} Orang</small>
 
         <p>${item.ucapan||"-"}</p>
 
@@ -555,11 +295,7 @@ function renderWish(item){
 
     `;
 
-    document
-
-    .getElementById("wishList")
-
-    .prepend(box);
+    document.getElementById("wishList").prepend(box);
 
 }
 
@@ -571,49 +307,16 @@ function updateStatistic(){
 
     const data=getWishData();
 
-    const hadir=data.filter(
+    document.getElementById("totalComments").textContent=data.length;
 
-        x=>x.status==="Hadir"
+    document.getElementById("totalPresent").textContent=
+        data.filter(x=>x.status==="Hadir").length;
 
-    );
+    document.getElementById("totalAbsent").textContent=
+        data.filter(x=>x.status==="Tidak Hadir").length;
 
-    const tidak=data.filter(
-
-        x=>x.status==="Tidak Hadir"
-
-    );
-
-    const tamu=data.reduce(
-
-        (a,b)=>a+Number(b.jumlah),
-
-        0
-
-    );
-
-    document.getElementById(
-
-        "totalComments"
-
-    ).textContent=data.length;
-
-    document.getElementById(
-
-        "totalPresent"
-
-    ).textContent=hadir.length;
-
-    document.getElementById(
-
-        "totalAbsent"
-
-    ).textContent=tidak.length;
-
-    document.getElementById(
-
-        "totalGuests"
-
-    ).textContent=tamu;
+    document.getElementById("totalGuests").textContent=
+        data.reduce((a,b)=>a+Number(b.jumlah),0);
 
 }
 
@@ -631,14 +334,11 @@ function sendWhatsapp(data){
 
 Konfirmasi Kehadiran
 
-Nama :
-${data.nama}
+Nama : ${data.nama}
 
-Status :
-${data.status}
+Status : ${data.status}
 
-Jumlah Tamu :
-${data.jumlah}
+Jumlah Tamu : ${data.jumlah}
 
 Ucapan :
 
@@ -655,30 +355,17 @@ ${data.ucapan}`;
 }
 
 /* ==========================================================
-   MUSIC PLAYER
+   MUSIC
 ========================================================== */
 
 function initMusic(){
 
     const music=document.getElementById("music");
-
     const button=document.getElementById("musicToggle");
 
     if(!music||!button) return;
 
     let playing=false;
-
-    const lastState=localStorage.getItem("music");
-
-    if(lastState==="play"){
-
-        music.play().catch(()=>{});
-
-        playing=true;
-
-        button.innerHTML="❚❚";
-
-    }
 
     button.addEventListener("click",()=>{
 
@@ -688,19 +375,15 @@ function initMusic(){
 
             playing=false;
 
-            button.innerHTML="♪";
-
-            localStorage.setItem("music","pause");
+            button.innerHTML="♫";
 
         }else{
 
-            music.play();
+            music.play().catch(()=>{});
 
             playing=true;
 
             button.innerHTML="❚❚";
-
-            localStorage.setItem("music","play");
 
         }
 
@@ -709,20 +392,38 @@ function initMusic(){
 }
 
 /* ==========================================================
-   LIGHTBOX GALLERY
+   GALLERY LIGHTBOX
 ========================================================== */
 
 function initGallery(){
 
     const images=document.querySelectorAll(".gallery-grid img");
 
-    const lightbox=document.getElementById("lightbox");
+    if(!images.length) return;
+
+    let lightbox=document.getElementById("lightbox");
+
+    if(!lightbox){
+
+        lightbox=document.createElement("div");
+
+        lightbox.id="lightbox";
+
+        lightbox.innerHTML=`
+
+        <span class="close-lightbox">&times;</span>
+
+        <img id="lightboxImg">
+
+        `;
+
+        document.body.appendChild(lightbox);
+
+    }
 
     const preview=document.getElementById("lightboxImg");
 
     const close=document.querySelector(".close-lightbox");
-
-    if(!images.length) return;
 
     images.forEach(img=>{
 
@@ -738,25 +439,25 @@ function initGallery(){
 
     });
 
-    close.addEventListener("click",closeLightbox);
-
-    lightbox.addEventListener("click",(e)=>{
-
-        if(e.target===lightbox){
-
-            closeLightbox();
-
-        }
-
-    });
-
-    function closeLightbox(){
+    close.onclick=()=>{
 
         lightbox.style.display="none";
 
         document.body.style.overflow="";
 
-    }
+    };
+
+    lightbox.onclick=e=>{
+
+        if(e.target===lightbox){
+
+            lightbox.style.display="none";
+
+            document.body.style.overflow="";
+
+        }
+
+    };
 
 }
 
@@ -772,15 +473,7 @@ function initBackToTop(){
 
     window.addEventListener("scroll",()=>{
 
-        if(window.scrollY>500){
-
-            btn.style.display="flex";
-
-        }else{
-
-            btn.style.display="none";
-
-        }
+        btn.style.display=window.scrollY>500?"flex":"none";
 
     });
 
@@ -799,7 +492,7 @@ function scrollTopPage(){
 }
 
 /* ==========================================================
-   SCROLL PROGRESS BAR
+   SCROLL PROGRESS
 ========================================================== */
 
 function initScrollProgress(){
@@ -810,17 +503,9 @@ function initScrollProgress(){
 
     window.addEventListener("scroll",()=>{
 
-        const total=
+        const total=document.documentElement.scrollHeight-document.documentElement.clientHeight;
 
-        document.documentElement.scrollHeight-
-
-        document.documentElement.clientHeight;
-
-        const current=
-
-        window.scrollY;
-
-        const percent=(current/total)*100;
+        const percent=(window.scrollY/total)*100;
 
         progress.style.width=percent+"%";
 
@@ -829,14 +514,14 @@ function initScrollProgress(){
 }
 
 /* ==========================================================
-   NAVBAR ACTIVE
+   SIDEBAR ACTIVE
 ========================================================== */
 
 function initNavbar(){
 
     const links=document.querySelectorAll(".sidebar nav a");
 
-    const sections=document.querySelectorAll("section");
+    const sections=document.querySelectorAll("section[id]");
 
     if(!links.length) return;
 
@@ -844,13 +529,11 @@ function initNavbar(){
 
         let current="";
 
-        sections.forEach(section=>{
+        sections.forEach(sec=>{
 
-            const top=section.offsetTop-180;
+            if(window.scrollY>=sec.offsetTop-150){
 
-            if(window.scrollY>=top){
-
-                current=section.getAttribute("id");
+                current=sec.id;
 
             }
 
@@ -858,17 +541,13 @@ function initNavbar(){
 
         links.forEach(link=>{
 
-            link.classList.remove("active");
+            link.classList.toggle(
 
-            if(
+                "active",
 
                 link.getAttribute("href")==="#"+current
 
-            ){
-
-                link.classList.add("active");
-
-            }
+            );
 
         });
 
@@ -906,10 +585,32 @@ window.addEventListener("scroll",()=>{
 
     const hero=document.querySelector(".hero-bg");
 
-    if(!hero) return;
+    if(hero){
 
-    hero.style.transform=
+        hero.style.transform=`translateY(${window.scrollY*0.3}px)`;
 
-    `translateY(${window.scrollY*0.35}px) scale(1.1)`;
+    }
+
+});
+
+/* ==========================================================
+   HIDE LOADER
+========================================================== */
+
+window.addEventListener("load",()=>{
+
+    const loader=document.getElementById("loader");
+
+    if(loader){
+
+        loader.style.opacity="0";
+
+        setTimeout(()=>{
+
+            loader.style.display="none";
+
+        },500);
+
+    }
 
 });
