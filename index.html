@@ -86,51 +86,36 @@ content="Undangan Pernikahan Soehendra & Rica Rismawati">
 
 </aside>
 
-<!-- ========================= -->
-<!-- MOBILE NAV -->
-<!-- ========================= -->
+<!-- ==========================
+MOBILE NAVIGATION
+========================== -->
 
 <nav class="mobile-nav">
 
-<a href="#home">
+    <a href="#home">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
 
-🏠
+    <a href="#couple">
+        <i class="fa-solid fa-heart"></i>
+        <span>Mempelai</span>
+    </a>
 
-<span>Home</span>
+    <a href="#story">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Story</span>
+    </a>
 
-</a>
+    <a href="#event">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Acara</span>
+    </a>
 
-<a href="#couple">
-
-👰
-
-<span>Mempelai</span>
-
-</a>
-
-<a href="#event">
-
-📅
-
-<span>Acara</span>
-
-</a>
-
-<a href="#gallery">
-
-🖼
-
-<span>Galeri</span>
-
-</a>
-
-<a href="#rsvp">
-
-💌
-
-<span>Ucapan</span>
-
-</a>
+    <a href="#gallery">
+        <i class="fa-solid fa-image"></i>
+        <span>Gallery</span>
+    </a>
 
 </nav>
 
@@ -891,36 +876,17 @@ Gallery
 
 </section>
 
-<!-- ========================= -->
-<!-- RSVP -->
-<!-- ========================= -->
+<section id="rsvp" class="section">
 
-<section class="section" id="rsvp">
-
-<div class="container">
-
-<div class="section-heading"
-data-aos="fade-up">
-
-<span>
-
-Reservation
-
-</span>
-
-<h2>
-
+<h2 class="section-title">
 RSVP & Ucapan
-
 </h2>
-
-</div>
 
 <div class="rsvp-wrapper">
 
-<div class="rsvp-form-card glass">
+<div>
 
-<form id="rsvpForm">
+<form class="rsvp-form" id="rsvpForm">
 
 <input
 type="text"
@@ -928,27 +894,11 @@ id="nama"
 placeholder="Nama Anda"
 required>
 
-<select
-id="status"
-required>
+<select id="status">
 
-<option value="">
+<option>Hadir</option>
 
-Konfirmasi Kehadiran
-
-</option>
-
-<option value="Hadir">
-
-Hadir
-
-</option>
-
-<option value="Tidak Hadir">
-
-Tidak Hadir
-
-</option>
+<option>Tidak Hadir</option>
 
 </select>
 
@@ -960,11 +910,9 @@ value="1">
 
 <textarea
 id="ucapan"
-rows="6"
-placeholder="Tuliskan doa terbaik..."></textarea>
+placeholder="Tulis doa dan ucapan terbaik..."></textarea>
 
-<button
-type="submit">
+<button type="submit">
 
 Kirim RSVP
 
@@ -974,18 +922,47 @@ Kirim RSVP
 
 </div>
 
-<div class="wish-container glass">
+<div>
 
-<h3>
+<div class="stats-grid">
 
-Ucapan Tamu
+<div class="stat-card">
 
-</h3>
+<h3 id="totalComments">0</h3>
 
-<div id="wishList"
-class="wish-list">
+<p>Ucapan</p>
 
 </div>
+
+<div class="stat-card">
+
+<h3 id="totalPresent">0</h3>
+
+<p>Hadir</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3 id="totalAbsent">0</h3>
+
+<p>Tidak Hadir</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3 id="totalGuests">0</h3>
+
+<p>Total Tamu</p>
+
+</div>
+
+</div>
+
+<div
+class="wish-list"
+id="wishList">
 
 </div>
 
